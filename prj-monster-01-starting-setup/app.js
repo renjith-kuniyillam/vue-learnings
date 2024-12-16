@@ -9,7 +9,36 @@ var app = Vue.createApp({
             monsterHealth: 100,
             playerHealth: 100,
             currentRound: 0,
+            winner: null,
+            winStatus: null
         };
+    },
+    watch: {
+        playerHealth(value) {
+            this.winner = null;
+            if(this.playerHealth === 0 && this.monsterHealth === 0) {
+                this.winner = 'draw';
+                this.winStatus = true;
+            } else if (this.playerHealth === 0 && this.monsterHealth > 0) {
+                this.winner = 'monster';
+                this.winStatus = true;
+            } else {
+                console.log('this.winner', this.winner);
+                this.winner = 'player';
+            }
+        },
+        monsterHealth(value) {
+            this.winner = null;
+            if(this.playerHealth === 0 && this.monsterHealth === 0) {
+                this.winner = 'draw';
+                this.winStatus = true;
+            } else if (this.monsterHealth === 0 && this.playerHealth > 0) {
+                this.winner = 'player';
+                this.winStatus = true;
+            } else {
+                this.winner = 'monster';
+            }
+        }
     },
     computed: {
         monsterBarStyles() {
@@ -27,11 +56,22 @@ var app = Vue.createApp({
             this.currentRound++;
             const attackValue = getRandomValue(5, 12);
             this.monsterHealth -= attackValue;
+            if(this.monsterHealth <= 0) {
+                this.monsterHealth = 0;
+                return;
+            }
             this.attackPlayer();
+            console.log('this.monsterHealth', this.monsterHealth);
         },
         attackPlayer() {
-            const attackValue = getRandomValue(8, 15);
+            const attackValue = getRandomValue(3, 8);
             this.playerHealth -= attackValue;
+            if(this.playerHealth <= 0) {
+                this.playerHealth = 0;
+                return;
+            }
+            console.log('this.playerHealth', this.playerHealth);
+
         },
         specialAttack() {
             this.currentRound++;
