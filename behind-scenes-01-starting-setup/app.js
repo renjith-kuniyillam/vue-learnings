@@ -16,3 +16,17 @@ const app = Vue.createApp({
 });
 
 app.mount('#app');
+
+
+const app2 = Vue.createApp({
+  template: `
+    <p>{{ testVarialbe }}</p>
+  `,
+  data() {
+    return {
+      testVarialbe: "This is app 2"
+    }
+  }
+})
+
+app2.mount('#app2')
