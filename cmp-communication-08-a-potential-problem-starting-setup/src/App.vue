@@ -38,6 +38,7 @@ export default {
   provide: function () {
     return {
       topics: this.topics,
+      activateTheTopic: this.activateTopic,
     };
   },
   methods: {
