@@ -1,20 +1,22 @@
 <template>
-  <section>
-    <div>
+  <base-card>
+    <template #header>
+      <h2>Available Badges</h2>
+    </template>
+    <template #default>
       <h3>{{ fullName }}</h3>
       <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
-    </div>
-    <p>{{ infoText }}</p>
-  </section>
+      <p>{{ infoText }}</p>
+    </template>
+  </base-card>
 </template>
-
 <script>
 export default {
-  props: ['fullName', 'infoText', 'role'],
+  props: ["fullName", "infoText", "role"],
 };
 </script>
 
-<style>
+<style scoped>
 section {
   margin: 2rem auto;
   max-width: 30rem;
