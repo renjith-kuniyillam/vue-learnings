@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  inject: ['topics'],
   props: ['topics'],
   emits: ['select-topic'],
 };

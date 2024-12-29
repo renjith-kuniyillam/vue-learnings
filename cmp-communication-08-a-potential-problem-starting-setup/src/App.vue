@@ -4,7 +4,10 @@
       :topic-title="activeTopic && activeTopic.title"
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base
+      :topics="topics"
+      @select-topic="activateTopic"
+    ></knowledge-base>
   </div>
 </template>
 
@@ -32,10 +35,26 @@ export default {
       activeTopic: null,
     };
   },
+  provide: function () {
+    return {
+      topics: this.topics,
+    };
+  },
   methods: {
     activateTopic(topicId) {
       this.activeTopic = this.topics.find((topic) => topic.id === topicId);
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.topics.push({
+        id: 'New Topic',
+        title: 'New Topic',
+        description: 'Topic that is being added after 3 seconds on mounting',
+        fullText:
+          'Topic that is being added after 3 seconds on mounting',
+      });
+    }, 3000);
   },
 };
 </script>
