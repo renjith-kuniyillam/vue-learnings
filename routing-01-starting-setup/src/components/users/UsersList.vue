@@ -12,6 +12,11 @@ export default {
   components: {
     UserItem,
   },
+  data() {
+    return {
+      savedChanges: false
+    }
+  },
   inject: ['users'],
   methods: {
     confirmButton() {
@@ -19,7 +24,17 @@ export default {
       this.$router.forward();
       this.$router.back();
     }
-  }
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.savedChanges) {
+      next();
+    } else {
+      const confirmed = window.confirm('Do you want to leave without saving?');
+      if (confirmed) {
+        next();
+      }
+    }
+  },
 };
 </script>
 

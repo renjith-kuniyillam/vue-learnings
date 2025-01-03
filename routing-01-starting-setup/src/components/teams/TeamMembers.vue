@@ -32,7 +32,6 @@ export default {
     getData() {
       // const teamId = this.$route.params.teamId;
       const teamId = this.teamId;
-
       if (teamId) {
         const team = this.teams.find((team) => team.id === teamId);
         if (team) {
@@ -45,6 +44,10 @@ export default {
         this.$emit('set-page', 'Teams');
       }
     },
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log('beforeRouteUpdate');
+    next();
   },
   watch: {
     // '$route.params.teamId'() {
