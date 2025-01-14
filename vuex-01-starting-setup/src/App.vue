@@ -1,13 +1,16 @@
 <template>
   <base-container title="Vuex"></base-container>
+  <auth-container></auth-container>
 </template>
 
 <script>
+import AuthContainer from './components/AuthContainer.vue';
 import BaseContainer from './components/BaseContainer.vue';
 
 export default {
   components: {
     BaseContainer,
+    AuthContainer
   },
 };
 </script>
